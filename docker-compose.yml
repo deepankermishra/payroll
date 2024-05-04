@@ -1,0 +1,10 @@
+name: 'payroll'
+services:
+  account:
+    build: ./services/account
+    ports:
+      - "3000:3000"
+  statistics:
+    build: ./services/statistics
+    ports:
+      - "3001:3001"
