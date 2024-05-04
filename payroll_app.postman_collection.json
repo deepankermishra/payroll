@@ -1,0 +1,371 @@
+{
+	"info": {
+		"_postman_id": "d48601e6-8e02-489b-933a-f2c8ba867fca",
+		"name": "payroll_app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5591054"
+	},
+	"item": [
+		{
+			"name": "records",
+			"item": [
+				{
+					"name": "add records",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.sendRequest(\"https://postman-echo.com/get\", function (err, response) {",
+									"    console.log(response.json());",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzE0ODQ1MjM5LCJleHAiOjE3MTQ5MzE2Mzl9.IuYU89o2Nx_9y4lBV9Frw34PwDCgXzw_eqLCZNiSgGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\t\"name\": \"May\",\n\t\t\"salary\": \"180000\",\n\t\t\"currency\": \"USD\",\n\t\t\"department\": \"Engineering\",\n\t\t\"sub_department\": \"Backend\"\n\t}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/api/records",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listrecords",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzE0ODQ1MjM5LCJleHAiOjE3MTQ5MzE2Mzl9.IuYU89o2Nx_9y4lBV9Frw34PwDCgXzw_eqLCZNiSgGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/records",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"records"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete record",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzE0ODQ1MjM5LCJleHAiOjE3MTQ5MzE2Mzl9.IuYU89o2Nx_9y4lBV9Frw34PwDCgXzw_eqLCZNiSgGg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/records/a7991295-5bca-4a31-ba33-a85bc960f489",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"records",
+								"a7991295-5bca-4a31-ba33-a85bc960f489"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"test\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/auth/signup",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjAsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDgwNTYxNiwiZXhwIjoxNzE0ODkyMDE2fQ.FweDTtl_Mr_-athfeflU3HWeEOTrxfvshXdTIC_oq5c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/user/admin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"user",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjAsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDgwNTYxNiwiZXhwIjoxNzE0ODkyMDE2fQ.FweDTtl_Mr_-athfeflU3HWeEOTrxfvshXdTIC_oq5c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "stats",
+			"item": [
+				{
+					"name": "stats",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjAsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDgwNTYxNiwiZXhwIjoxNzE0ODkyMDE2fQ.FweDTtl_Mr_-athfeflU3HWeEOTrxfvshXdTIC_oq5c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/stats",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stats contract",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjAsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDgwNTYxNiwiZXhwIjoxNzE0ODkyMDE2fQ.FweDTtl_Mr_-athfeflU3HWeEOTrxfvshXdTIC_oq5c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/stats/contract",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"stats",
+								"contract"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stats departments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjAsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDgwNTYxNiwiZXhwIjoxNzE0ODkyMDE2fQ.FweDTtl_Mr_-athfeflU3HWeEOTrxfvshXdTIC_oq5c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/stats/departments",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"stats",
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stats sub- departments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjAsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNDgwNTYxNiwiZXhwIjoxNzE0ODkyMDE2fQ.FweDTtl_Mr_-athfeflU3HWeEOTrxfvshXdTIC_oq5c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/api/stats/departments/subdepartments",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"stats",
+								"departments",
+								"subdepartments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

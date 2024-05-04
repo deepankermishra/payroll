@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const express = require('express');
-const { addUser, getUserByUsername } = require('./db');
-const cryptoUtils = require('./crypto_utils');
+const { addUser, getUserByUsername } = require('../db/in_memory');
+const cryptoUtils = require('../utils/crypto');
 
 const router = express.Router();
 
@@ -18,8 +18,6 @@ router.post('/login', async (req, res) => {
     return res.status(401).send('Authentication failed');
   }
 
-  console.log("found user:", user)
-  
   const validPassword = cryptoUtils.verifyPassword(user.password, password);
   if (!validPassword) {
     return res.status(401).send('Authentication failed');

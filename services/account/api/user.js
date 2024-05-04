@@ -1,11 +1,13 @@
 const express = require('express');
-const { USERS_TABLE } = require('./db'); // Make sure to adjust the required path based on actual file location
+const { USERS_TABLE } = require('../db/in_memory');
 
 const router = express.Router();
 
 // Retrieve user by user ID
 router.get('/user/:username', (req, res) => {
+
     const { username } = req.params;
+
     if (!username) {
         return res.status(400).send('username is required');
     }

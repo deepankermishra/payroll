@@ -1,10 +1,50 @@
 name: 'payroll'
+
+
 services:
   account:
-    build: ./services/account
+    build:
+      context: ./services/account
+      args:
+        JWT_SECRET_KEY: jwt_secret_key
+        SERVICE_PORT: 3000
     ports:
       - "3000:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health/"]
+      interval: 1s
+      timeout: 2s
+      retries: 5
+
   statistics:
-    build: ./services/statistics
+    build:
+      context: ./services/statistics
+      args:
+        ACCOUNT_SERVICE_URL: http://account
+        ACCOUNT_SERVICE_PORT: 3000
+        JWT_SECRET_KEY: jwt_secret_key
+        SERVICE_PORT: 3001
     ports:
       - "3001:3001"
+    depends_on:
+      account:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health/"]
+      interval: 1s
+      timeout: 2s
+      retries: 5
+
+  tester:
+    build:
+      context: ./tester
+      args:
+        ACCOUNT_SERVICE_URL: http://account
+        ACCOUNT_SERVICE_PORT: 3000
+        STATS_SERVICE_URL: http://statistics
+        STATS_SERVICE_PORT: 3001
+    depends_on:
+      account:
+        condition: service_healthy
+      statistics:
+        condition: service_healthy

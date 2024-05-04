@@ -1,6 +1,6 @@
 const express = require('express');
 const { body: validationBody, validationResult } = require('express-validator');
-const  db = require('./db');
+const  db = require('../db/in_memory');
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ const router = express.Router();
 const recordValidationRules = [
     validationBody('name').isString().trim().notEmpty().withMessage('Name must be a non-empty string'),
     validationBody('salary').isNumeric().withMessage('Salary must be a numeric string'),
-    validationBody('currency').isString().trim().withMessage('Currency must be a valid ISO 4217 currency code'),
+    validationBody('currency').isString().trim().withMessage('Currency must be a valid currency code string'),
     validationBody('department').isString().trim().notEmpty().withMessage('Department must be a non-empty string'),
     validationBody('sub_department').isString().trim().notEmpty().withMessage('Sub-department must be a non-empty string'),
     validationBody('on_contract').optional().isString().withMessage('on_contract must either "true" or "false" when specified')
@@ -35,6 +35,7 @@ router.delete('/records/:id', (req, res) => {
     db.deleteRecord(id);
     res.sendStatus(200);
 });
+
 
 router.get('/records', (req, res) => {
     const records = db.getAllRecords()

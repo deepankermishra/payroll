@@ -1,18 +1,23 @@
 FROM node:20
-RUN apt-get update && apt-get install -y \
-    build-essential
+RUN apt-get update && apt-get install -y build-essential
+
+ARG ACCOUNT_SERVICE_URL=http://account
+ARG ACCOUNT_SERVICE_PORT=3000
+ARG JWT_SECRET_KEY=jwt_secret_key
+ARG SERVICE_PORT=3001
+
+ENV ACCOUNT_SERVICE_URL=$ACCOUNT_SERVICE_URL
+ENV ACCOUNT_SERVICE_PORT=$ACCOUNT_SERVICE_PORT
+ENV JWT_SECRET_KEY=$JWT_SECRET_KEY
+ENV SERVICE_PORT=$SERVICE_PORT
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-
 RUN npm install
 
 COPY . .
 
-ENV JWT_SECRET_KEY jwt_secret_key
-ENV PORT 3001
+EXPOSE $SERVICE_PORT
 
-EXPOSE 3001
 CMD ["node", "index.js"]
-

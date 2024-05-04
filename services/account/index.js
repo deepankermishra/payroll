@@ -6,11 +6,16 @@ const authRouter = require('./api/auth');
 const authMiddleware = require('./middleware/auth');
 const userRouter = require('./api/user');
 
+const healthRouter = require('./api/health');
+
 const app = express();
 
-// These paths are public.
+
 app.use(bodyParser.json());
+
+// Unauthenticated APIs.
 app.use('/auth', authRouter);
+app.use('/health', healthRouter);
 
 // Authenticated APIs.
 app.use('/api', authMiddleware, userRouter);
